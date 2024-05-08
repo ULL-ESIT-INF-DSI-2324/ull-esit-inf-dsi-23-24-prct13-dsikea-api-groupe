@@ -1,5 +1,5 @@
 import { model } from 'mongoose';
-import { CustomerSchema } from './schemaModel.js';
+import { CustomerSchema } from './customerSchema.js';
 import { CustomerDocumentInterface } from './customerModel.js';
 
-export const Customer = model<CustomerDocumentInterface>('Customer', CustomerSchema);
+export const Customers = model<CustomerDocumentInterface>('Customer', CustomerSchema);
