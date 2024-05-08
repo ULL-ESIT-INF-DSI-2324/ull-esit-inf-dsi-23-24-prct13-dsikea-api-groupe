@@ -7,17 +7,13 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/furnitures', (req, res) => {
+app.get('/customers', (req, res) => {
   res.send('Render and Mongoose')
 })
 
-app.post('/furnitures', (req, res) => {
+app.post('/customers', (req, res) => {
   const furniture = new Furniture(req.body);
-  furniture.save().then((furn) => {
-    res.send(furn)
-  }).catch((err) => {
-    res.send(err);
-  })
+  res.send(JSON.stringify(furniture))
 })
 
 app.listen(port, () => {
