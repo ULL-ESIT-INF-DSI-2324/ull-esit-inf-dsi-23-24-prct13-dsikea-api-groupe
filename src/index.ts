@@ -13,13 +13,12 @@ app.get('/customers', (req, res) => {
 })
 
 app.post('/customers', (req, res) => {
+  console.log(req.body);
   const customer = new Customers(req.body);
-  console.log(customer);
-  
   customer.save().then((cst) => {
     res.send(cst);
   }).catch((err) => {
-    res.status(400).send(err);
+    res.status(401).send(err);
   })
 })
 
