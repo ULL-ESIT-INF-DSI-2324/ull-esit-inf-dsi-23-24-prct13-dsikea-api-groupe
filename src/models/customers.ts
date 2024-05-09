@@ -1,7 +1,6 @@
 import { Document, Schema, model } from 'mongoose';
 
 export interface CustomerDocumentInterface extends Document {
-  id: string,
   dni: string,
   name: string,
   surname: string,
@@ -10,12 +9,6 @@ export interface CustomerDocumentInterface extends Document {
 }
 
 export const CustomerSchema = new Schema<CustomerDocumentInterface>({
-  id: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-  },
   dni: {
     type: String,
     unique: true,
@@ -48,7 +41,7 @@ export const CustomerSchema = new Schema<CustomerDocumentInterface>({
     trim: true,
     validate: (value :string) => {
       if (/[a-zA-Z]/.test(value) || value.length != 9) {
-        throw new Error('Customer number must dont have letters');
+        throw new Error('Customer number must dont have letters or lenth must be 9');
       }
     }
   },
