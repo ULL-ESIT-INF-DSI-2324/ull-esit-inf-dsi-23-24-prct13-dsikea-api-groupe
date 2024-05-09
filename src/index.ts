@@ -9,16 +9,23 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get('/customers', async (req :Request, res :Response) => {
+  const {id, dni} = req.query;
   try {
-    const customers = await Customers.find();
-    res.send(customers);
+    let customer;
+    if (id) {
+      customer = await Customers.findOne({ id: id });
+    } else if (dni) {
+      customer = await Customers.findOne({ dni: dni });      
+    } else {
+      customer = await Customers.find();
+    }
+    res.send(customer);
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
 app.post('/customers', (req, res) => {
-  console.log(req.body);
   const customer = new Customers(req.body);
   customer.save().then((cst) => {
     res.send(cst);
@@ -26,7 +33,6 @@ app.post('/customers', (req, res) => {
     res.status(400).send(err);
   })
 })
-
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);  
