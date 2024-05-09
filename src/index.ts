@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express'
 import './db/mongoose.js'
 // import { Furniture } from './models/furniture.js'
-import { Customers } from './models/customers/customers.js';
+import { Customers } from './models/customers.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
