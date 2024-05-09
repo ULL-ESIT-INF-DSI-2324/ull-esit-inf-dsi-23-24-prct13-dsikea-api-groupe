@@ -6,6 +6,12 @@ export const CustomerSchema = new Schema({
         required: true,
         trim: true,
     },
+    dni: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true,
+    },
     name: {
         type: String,
         required: true,

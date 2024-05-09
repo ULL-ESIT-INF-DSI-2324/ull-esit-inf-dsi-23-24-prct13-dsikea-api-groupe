@@ -8,6 +8,12 @@ export const CustomerSchema = new Schema<CustomerDocumentInterface>({
     required: true,
     trim: true,
   },
+  dni: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+  },
   name: {
     type: String,
     required: true,
