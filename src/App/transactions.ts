@@ -23,8 +23,8 @@ transactionRouter.get('/transactions', async (req :Request, res :Response) => {
 
 transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   try {
-    const {humanId, type} = req.body;
-    const human = await Customers.findById(humanId) || await Providers.findById(humanId);
+    const { type } = req.body;
+    const human = await Customers.findById(req.body.customer) || await Providers.findOne(req.body.provider);
     if (!human) return res.status(404).send("Human not found");
     const customer = await Customers.findById(humanId);
     const provider = await Providers.findById(humanId);
