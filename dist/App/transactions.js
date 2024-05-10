@@ -21,7 +21,7 @@ transactionRouter.get('/transactions', async (req, res) => {
         res.status(400).send(error);
     }
 });
-transactionRouter.post('/transaction', async (req, res) => {
+transactionRouter.post('/transactions', async (req, res) => {
     try {
         const { humanId, type } = req.body;
         const human = await Customers.findById(humanId) || await Providers.findById(humanId);

@@ -28,11 +28,11 @@ export const TransactionSchema = new Schema<TransactionDocumentInterface>({
   ],
   customer: {
     type: Schema.Types.ObjectId,
-    ref: "Customer",
+    ref: "Customers",
   },
   provider: {
     type: Schema.Types.ObjectId,
-    ref: "Provider",
+    ref: "Providers",
   },
   pay: {
     type: Number,
