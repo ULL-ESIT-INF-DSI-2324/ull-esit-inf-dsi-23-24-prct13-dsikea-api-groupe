@@ -1,9 +1,9 @@
 import express, {Request, Response} from 'express'
 import { Furnitures } from '../models/furnitures.js';
 
-export const providerRouter = express.Router();
+export const furnitureRouter = express.Router();
 
-providerRouter.get('/furnitures', async (req :Request, res :Response) => {
+furnitureRouter.get('/furnitures', async (req :Request, res :Response) => {
   try {
     const {id, serialNumber} = req.query;
     let provider;
@@ -23,7 +23,7 @@ providerRouter.get('/furnitures', async (req :Request, res :Response) => {
   }
 });
 
-providerRouter.get('Furnitures/:id', async (req :Request, res :Response) => {
+furnitureRouter.get('Furnitures/:id', async (req :Request, res :Response) => {
   try {
     const id = req.params.id;
     const provider = await Furnitures.findById({ id });
@@ -36,7 +36,7 @@ providerRouter.get('Furnitures/:id', async (req :Request, res :Response) => {
   }
 });
 
-providerRouter.post('/furnitures', async (req, res) => {
+furnitureRouter.post('/furnitures', async (req, res) => {
   const provider = new Furnitures(req.body);
   provider.save().then((provider) => {
     res.send(provider);
@@ -45,7 +45,7 @@ providerRouter.post('/furnitures', async (req, res) => {
   })
 })
 
-providerRouter.patch('/furnitures', async (req, res) => {
+furnitureRouter.patch('/furnitures', async (req, res) => {
   try {
     const serialNumber = req.query;
     const updates = req.body;
@@ -59,7 +59,7 @@ providerRouter.patch('/furnitures', async (req, res) => {
   }
 })
 
-providerRouter.patch('Furnitures/:id', async (req, res) => {
+furnitureRouter.patch('Furnitures/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const updates = req.body;
@@ -73,7 +73,7 @@ providerRouter.patch('Furnitures/:id', async (req, res) => {
   }
 })
 
-providerRouter.get('/furnitures', async (req :Request, res :Response) => {
+furnitureRouter.get('/furnitures', async (req :Request, res :Response) => {
   try {
     const {id, serialNumber} = req.query;
     let provider;
@@ -93,7 +93,7 @@ providerRouter.get('/furnitures', async (req :Request, res :Response) => {
   }
 });
 
-providerRouter.delete('Furnitures/:id', async (req, res) => {
+furnitureRouter.delete('Furnitures/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const provider = await Furnitures.findByIdAndDelete({ id })
