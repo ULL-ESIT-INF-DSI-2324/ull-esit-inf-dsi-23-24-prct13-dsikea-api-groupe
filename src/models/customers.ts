@@ -1,7 +1,8 @@
 import { Document, Schema, model } from 'mongoose';
 
 export interface CustomerDocumentInterface extends Document {
-  dni: string,
+  id: string,
+  nif: string,
   name: string,
   surname: string,
   direction: string,
@@ -9,14 +10,20 @@ export interface CustomerDocumentInterface extends Document {
 }
 
 export const CustomerSchema = new Schema<CustomerDocumentInterface>({
-  dni: {
+  id: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+  },
+  nif: {
     type: String,
     unique: true,
     required: true,
     trim: true,
     validate: (value :string) => {
       if (!value.match(/[A-Z]$/) || value.length != 9) {
-        throw new Error('Customer DNI must end with a capital letter');
+        throw new Error('Customer NIF must end with a capital letter');
       }
     }
   },

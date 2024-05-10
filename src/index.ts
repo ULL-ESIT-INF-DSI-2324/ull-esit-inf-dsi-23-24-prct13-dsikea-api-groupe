@@ -10,12 +10,12 @@ app.use(express.json());
 
 app.get('/customers', async (req :Request, res :Response) => {
   try {
-    const {id, dni} = req.query;
+    const {id, nif} = req.query;
     let customer;
     if (id) {
       customer = await Customers.findOne({ id: id });
-    } else if (dni) {
-      customer = await Customers.findOne({ dni: dni });      
+    } else if (nif) {
+      customer = await Customers.findOne({ nif: nif });      
     } else {
       customer = await Customers.find();
     }
@@ -52,9 +52,9 @@ app.post('/customers', async (req, res) => {
 
 app.patch('/customers', async (req, res) => {
   try {
-    const dni = req.query;
+    const nif = req.query;
     const updates = req.body;
-    const customer = await Customers.findOneAndUpdate(dni, updates, {new :true })
+    const customer = await Customers.findOneAndUpdate(nif, updates, {new :true })
     if (!customer) {
       return res.status(404).send("Client not found");
     }
@@ -91,10 +91,10 @@ app.delete('/customers/:id', async (req, res) => {
   }
 })
 
-app.delete('/customers/:dni', async (req, res) => {
+app.delete('/customers/:nif', async (req, res) => {
   try {
-    const dni = req.params.dni;
-    const customer = await Customers.findOneAndDelete({ dni })
+    const nif = req.params.nif;
+    const customer = await Customers.findOneAndDelete({ nif })
     if (!customer) {
       return res.status(404).send("Client not found");
     }
