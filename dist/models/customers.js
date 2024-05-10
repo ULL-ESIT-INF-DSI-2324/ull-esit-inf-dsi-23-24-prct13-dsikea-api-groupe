@@ -1,5 +1,4 @@
-import { Schema } from "mongoose";
-import { model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 export const CustomerSchema = new Schema({
     id: {
         type: String,
@@ -7,26 +6,41 @@ export const CustomerSchema = new Schema({
         required: true,
         trim: true,
     },
-    dni: {
+    nif: {
         type: String,
         unique: true,
         required: true,
         trim: true,
+        validate: (value) => {
+            if (!value.match(/[A-Z]$/) || value.length != 9) {
+                throw new Error('Customer NIF must end with a capital letter');
+            }
+        }
     },
     name: {
         type: String,
         required: true,
         trim: true,
     },
-    buys: {
+    surname: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    direction: {
         type: String,
         required: false,
         trim: true,
     },
-    money: {
-        type: Number,
-        required: false,
+    number: {
+        type: String,
+        required: true,
         trim: true,
+        validate: (value) => {
+            if (/[a-zA-Z]/.test(value) || value.length != 9) {
+                throw new Error('Customer number must dont have letters or lenth must be 9');
+            }
+        }
     },
 });
 export const Customers = model('Customer', CustomerSchema);

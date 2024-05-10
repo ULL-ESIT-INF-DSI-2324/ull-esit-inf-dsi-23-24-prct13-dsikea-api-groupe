@@ -22,14 +22,14 @@
 /// <reference types="mongoose/types/validation.js" />
 /// <reference types="mongoose/types/virtuals.js" />
 /// <reference types="mongoose/types/inferschematype.js" />
-import { Schema } from "mongoose";
-import { Document } from "mongoose";
+import { Document, Schema } from 'mongoose';
 export interface CustomerDocumentInterface extends Document {
     id: string;
-    dni: string;
+    nif: string;
     name: string;
-    buys: string;
-    money: number;
+    surname: string;
+    direction: string;
+    number: string;
 }
 export declare const CustomerSchema: Schema<CustomerDocumentInterface, import("mongoose").Model<CustomerDocumentInterface, any, any, any, Document<unknown, any, CustomerDocumentInterface> & CustomerDocumentInterface & {
     _id: import("mongoose").Types.ObjectId;
