@@ -15,7 +15,7 @@ providerRouter.get('/providers', async (req, res) => {
             provider = await Providers.find();
         }
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
         res.send(provider);
     }
@@ -28,7 +28,7 @@ providerRouter.get('providers/:id', async (req, res) => {
         const id = req.params.id;
         const provider = await Providers.findById({ id });
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
         res.send(provider);
     }
@@ -50,9 +50,9 @@ providerRouter.patch('/providers', async (req, res) => {
         const updates = req.body;
         const provider = await Providers.findOneAndUpdate(nif, updates, { new: true });
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
-        res.send("Client has been updated");
+        res.send("Provider has been updated");
     }
     catch (error) {
         res.status(400).send(error);
@@ -64,9 +64,9 @@ providerRouter.patch('providers/:id', async (req, res) => {
         const updates = req.body;
         const provider = await Providers.findByIdAndUpdate(id, updates, { new: true });
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
-        res.send("Client has been updated");
+        res.send("Provider has been updated");
     }
     catch (error) {
         res.status(400).send(error);
@@ -83,10 +83,10 @@ providerRouter.get('/providers', async (req, res) => {
             provider = await Providers.findOneAndDelete({ nif });
         }
         else {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
         res.send(provider);
     }
@@ -99,9 +99,9 @@ providerRouter.delete('providers/:id', async (req, res) => {
         const id = req.params.id;
         const provider = await Providers.findByIdAndDelete({ id });
         if (!provider) {
-            return res.status(404).send("Client not found");
+            return res.status(404).send("Provider not found");
         }
-        res.send("Client has been removed");
+        res.send("Provider has been removed");
     }
     catch (error) {
         res.status(400).send(error);

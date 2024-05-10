@@ -22,20 +22,24 @@
 /// <reference types="mongoose/types/validation.js" />
 /// <reference types="mongoose/types/virtuals.js" />
 /// <reference types="mongoose/types/inferschematype.js" />
-import { Document, Schema } from 'mongoose';
-export interface ProviderDocumentInterface extends Document {
-    id: string;
-    cif: string;
-    name: string;
-    surname: string;
-    direction: string;
-    number: string;
+import { Schema, Document } from "mongoose";
+import { CustomerDocumentInterface, CustomerSchema } from "./customers.js";
+import { ProviderDocumentInterface, ProviderSchema } from "./providers.js";
+import { FurnitureSchema } from "./furnitures.js";
+export interface TransactionDocumentInterface extends Document {
+    humanId: CustomerDocumentInterface | ProviderDocumentInterface;
+    type: string;
+    furniture: typeof FurnitureSchema[];
+    customer?: typeof CustomerSchema;
+    provider?: typeof ProviderSchema;
+    pay: number;
+    time: Date;
 }
-export declare const ProviderSchema: Schema<ProviderDocumentInterface, import("mongoose").Model<ProviderDocumentInterface, any, any, any, Document<unknown, any, ProviderDocumentInterface> & ProviderDocumentInterface & {
+export declare const TransactionSchema: Schema<TransactionDocumentInterface, import("mongoose").Model<TransactionDocumentInterface, any, any, any, Document<unknown, any, TransactionDocumentInterface> & TransactionDocumentInterface & {
     _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ProviderDocumentInterface, Document<unknown, {}, import("mongoose").FlatRecord<ProviderDocumentInterface>> & import("mongoose").FlatRecord<ProviderDocumentInterface> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, TransactionDocumentInterface, Document<unknown, {}, import("mongoose").FlatRecord<TransactionDocumentInterface>> & import("mongoose").FlatRecord<TransactionDocumentInterface> & {
     _id: import("mongoose").Types.ObjectId;
 }>;
-export declare const Providers: import("mongoose").Model<ProviderDocumentInterface, {}, {}, {}, Document<unknown, {}, ProviderDocumentInterface> & ProviderDocumentInterface & {
+export declare const Transactions: import("mongoose").Model<TransactionDocumentInterface, {}, {}, {}, Document<unknown, {}, TransactionDocumentInterface> & TransactionDocumentInterface & {
     _id: import("mongoose").Types.ObjectId;
 }, any>;

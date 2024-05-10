@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-export const CustomerSchema = new Schema({
+export const ProviderSchema = new Schema({
     id: {
         type: String,
         unique: true,
@@ -13,7 +13,7 @@ export const CustomerSchema = new Schema({
         trim: true,
         validate: (value) => {
             if (!value.match(/[A-Z]$/) || value.length != 9) {
-                throw new Error('Customer CIF must end with a capital letter');
+                throw new Error('Provider CIF must end with a capital letter');
             }
         }
     },
@@ -38,9 +38,9 @@ export const CustomerSchema = new Schema({
         trim: true,
         validate: (value) => {
             if (/[a-zA-Z]/.test(value) || value.length != 9) {
-                throw new Error('Customer number must dont have letters or lenth must be 9');
+                throw new Error('Provider number must dont have letters or lenth must be 9');
             }
         }
     },
 });
-export const Customers = model('Customer', CustomerSchema);
+export const Providers = model('Provider', ProviderSchema);

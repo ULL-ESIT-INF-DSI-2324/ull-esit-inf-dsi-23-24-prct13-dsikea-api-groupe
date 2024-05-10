@@ -23,19 +23,19 @@
 /// <reference types="mongoose/types/virtuals.js" />
 /// <reference types="mongoose/types/inferschematype.js" />
 import { Document, Schema } from 'mongoose';
-export interface ProviderDocumentInterface extends Document {
+export interface FurnitureDocumentInterface extends Document {
     id: string;
-    cif: string;
     name: string;
-    surname: string;
-    direction: string;
-    number: string;
+    description: string;
+    size: string;
+    price: number;
+    serialNumber: string;
 }
-export declare const ProviderSchema: Schema<ProviderDocumentInterface, import("mongoose").Model<ProviderDocumentInterface, any, any, any, Document<unknown, any, ProviderDocumentInterface> & ProviderDocumentInterface & {
+export declare const FurnitureSchema: Schema<FurnitureDocumentInterface, import("mongoose").Model<FurnitureDocumentInterface, any, any, any, Document<unknown, any, FurnitureDocumentInterface> & FurnitureDocumentInterface & {
     _id: import("mongoose").Types.ObjectId;
-}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ProviderDocumentInterface, Document<unknown, {}, import("mongoose").FlatRecord<ProviderDocumentInterface>> & import("mongoose").FlatRecord<ProviderDocumentInterface> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, FurnitureDocumentInterface, Document<unknown, {}, import("mongoose").FlatRecord<FurnitureDocumentInterface>> & import("mongoose").FlatRecord<FurnitureDocumentInterface> & {
     _id: import("mongoose").Types.ObjectId;
 }>;
-export declare const Providers: import("mongoose").Model<ProviderDocumentInterface, {}, {}, {}, Document<unknown, {}, ProviderDocumentInterface> & ProviderDocumentInterface & {
+export declare const Furnitures: import("mongoose").Model<FurnitureDocumentInterface, {}, {}, {}, Document<unknown, {}, FurnitureDocumentInterface> & FurnitureDocumentInterface & {
     _id: import("mongoose").Types.ObjectId;
 }, any>;
