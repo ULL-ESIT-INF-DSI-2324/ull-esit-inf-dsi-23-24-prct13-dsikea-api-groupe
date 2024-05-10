@@ -15,11 +15,11 @@ export const TransactionSchema = new Schema({
     ],
     customer: {
         type: Schema.Types.ObjectId,
-        ref: "Customers",
+        ref: "Customer",
     },
     provider: {
         type: Schema.Types.ObjectId,
-        ref: "Providers",
+        ref: "Provider",
     },
     pay: {
         type: Number,

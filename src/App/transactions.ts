@@ -5,7 +5,7 @@ import { Providers } from '../models/providers.js';
 
 export const transactionRouter = express.Router();
 
-transactionRouter.get('/transactions', async (req :Request, res :Response) => {
+transactionRouter.get('/transactions', async (req :Request, res :Response) => { // cambiar esto tiene que ser por _id, Time, Type, Pay
   try {
     const {nif, cif} = req.query;
     let transaction;
@@ -30,9 +30,9 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
     const provider = await Providers.findById(req.body.provider);
     const furnitures = await req.body.furniture;
     if (furnitures.length <= 0) return res.status(404).send("Furnitures has been not provide");
+    const transaction = new Transactions(req.body);
     if (type == "Sell") { // Proveedor vende
       if (customer) return res.status(404).send("You need to introduce a provider, not a customer")
-      const transaction = new Transactions(req.body);
       transaction.save().then((tsn) => {
         res.send(tsn);
       }).catch((err) => {
@@ -40,7 +40,6 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
       })
     } else if (type == "Buy") { // Customer compra
       if (provider) return res.status(404).send("You need to introduce a customer, not a provider")
-        const transaction = new Transactions(req.body);
       transaction.save().then((tsn) => {
         res.send(tsn);
       }).catch((err) => {
