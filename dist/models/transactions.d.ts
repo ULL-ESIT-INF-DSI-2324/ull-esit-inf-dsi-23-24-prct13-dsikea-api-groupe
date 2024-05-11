@@ -27,6 +27,7 @@ import { CustomerSchema } from "./customers.js";
 import { ProviderSchema } from "./providers.js";
 import { FurnitureSchema } from "./furnitures.js";
 export interface TransactionDocumentInterface extends Document {
+    id: string;
     type: string;
     furniture: typeof FurnitureSchema[];
     customer?: typeof CustomerSchema;

@@ -5,12 +5,18 @@ export const transactionRouter = express.Router();
 
 transactionRouter.get('/transactions', async (req :Request, res :Response) => { // cambiar esto tiene que ser por _id, Time, Type, Pay
   try {
-    const {nif, cif} = req.query;
+    const {id, time, type, pay} = req.query;
     let transaction;
-    if (nif) {
-      transaction = await Transactions.findOne({ humanId: nif })
-    } else if (cif) {
-      transaction = await Transactions.findOne({ humanId: cif })
+    if (id) {
+      transaction = await Transactions.findById({ id })
+    } else if (time) {
+      transaction = await Transactions.findOne({ time: time })
+    } else if (type) {
+      transaction = await Transactions.findOne({ type: type })
+    } else if (pay) {
+      transaction = await Transactions.findOne({ pay: pay })
+    } else {
+      transaction = await Transactions.find()
     }
     if (!transaction) return res.status(404).send("Transaction not found");
     res.send(transaction);

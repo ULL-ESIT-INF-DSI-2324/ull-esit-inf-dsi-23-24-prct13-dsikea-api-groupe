@@ -3,13 +3,22 @@ import { Transactions } from '../models/transactions.js';
 export const transactionRouter = express.Router();
 transactionRouter.get('/transactions', async (req, res) => {
     try {
-        const { nif, cif } = req.query;
+        const { id, time, type, pay } = req.query;
         let transaction;
-        if (nif) {
-            transaction = await Transactions.findOne({ humanId: nif });
+        if (id) {
+            transaction = await Transactions.findById({ id });
         }
-        else if (cif) {
-            transaction = await Transactions.findOne({ humanId: cif });
+        else if (time) {
+            transaction = await Transactions.findOne({ time: time });
+        }
+        else if (type) {
+            transaction = await Transactions.findOne({ type: type });
+        }
+        else if (pay) {
+            transaction = await Transactions.findOne({ pay: pay });
+        }
+        else {
+            transaction = await Transactions.find();
         }
         if (!transaction)
             return res.status(404).send("Transaction not found");
