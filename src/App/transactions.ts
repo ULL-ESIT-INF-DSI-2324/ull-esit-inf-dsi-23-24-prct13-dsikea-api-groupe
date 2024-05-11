@@ -29,8 +29,8 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
     const furniture = new Furnitures(req.body.furnitures);
     const providers = new Providers(req.body.providers);
     const customers = new Customers(req.body.customers);
-    const isProvider = await Providers.findById(req.body.provider._id);
-    const isCustomer = await Customers.findById(req.body.customer._id);
+    const isProvider = await Providers.findOne(req.body.provider);
+    const isCustomer = await Customers.findOne(req.body.customer);
     switch (type) {
       case "Sell":
         if (isCustomer) return res.status(404).send("You need to introduce a provider, not a customer")
