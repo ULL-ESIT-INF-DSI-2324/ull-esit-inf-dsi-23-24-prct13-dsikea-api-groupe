@@ -75,15 +75,12 @@ transactionRouter.get('/transactions/:type', async (req :Request, res :Response)
 transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   try {
     const transaction = new Transactions(req.body);
-    // const isProvider = req.body.provider;
-    // const isCustomer = req.body.customer;
+    const human = req.body.provider || req.body.customer;
     const furnitures = req.body.furniture;
-    // let human;
     if (furnitures.length <= 0) return res.status(404).send("You need to provide any furnitures")
-    // console.log(isProvider);
-    // console.log(isCustomer);
-    // console.log(req.body.type);
-    // console.log(req.body.furniture[0]);
+    console.log(human);
+    console.log(req.body.type);
+    console.log(req.body.furniture[0]);
       
     // // switch (req.body.type as string) {
     // //   case "Buy":
