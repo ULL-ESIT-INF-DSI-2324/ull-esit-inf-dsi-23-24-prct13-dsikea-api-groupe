@@ -91,11 +91,11 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
         return res.status(404).send("An error has ocurred");
         break;
     }
-    // for (let i = 0; i < furnitures.length; i++) {
-    //   const fns = furnitures[i];
-    //   const fn = await Furnitures.findOne(fns);
-    //   if (!fn) return res.status(404).send("You need to provide a correct furnitures IDs");
-    // }
+    for (let i = 0; i < furnitures.length; i++) {
+      const fns = furnitures[i];
+      const fn = await Furnitures.findById(fns);
+      if (!fn) return res.status(404).send("You need to provide a correct furnitures IDs");
+    }
     transaction.save().then((transaction) => {
       res.send(transaction);
     }).catch((err) => {
