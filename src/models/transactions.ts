@@ -5,6 +5,7 @@ import { FurnitureSchema } from "./furnitures.js";
 
 export interface TransactionDocumentInterface extends Document {
   id: string,
+  humanId: string,
   type: string,
   furniture: typeof FurnitureSchema[],
   customer?: typeof CustomerSchema,
@@ -17,6 +18,11 @@ export const TransactionSchema = new Schema<TransactionDocumentInterface>({
   id: {
     type: String,
     unique: true,
+    required: true,
+    trim: true,
+  },
+  humanId: {
+    type: String,
     required: true,
     trim: true,
   },

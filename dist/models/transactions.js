@@ -6,6 +6,11 @@ export const TransactionSchema = new Schema({
         required: true,
         trim: true,
     },
+    humanId: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     type: {
         type: String,
         enum: ["Sell", "Buy"],
