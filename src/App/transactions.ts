@@ -25,8 +25,10 @@ transactionRouter.get('/transactions', async (req :Request, res :Response) => { 
 transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   try {
     const transaction = new Transactions(req.body);
-    transaction.save().then((tsn) => {
-      res.send(tsn);
+    transaction.save().then((transaction) => {
+      res.send(transaction);
+    }).catch((err) => {
+      res.status(400).send(err);
     })
   } catch (error) {
     res.status(404).send(error);
