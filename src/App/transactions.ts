@@ -43,10 +43,10 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
       transaction.save().then((tsn) => {
         res.send(tsn);
       }).catch((err) => {
-        res.status(400).send(err);
+        res.status(404).send(err);
       })
     }
   } catch (error) {
-    res.status(400).send(error);
+    res.status(403).send(error);
   }
 })
