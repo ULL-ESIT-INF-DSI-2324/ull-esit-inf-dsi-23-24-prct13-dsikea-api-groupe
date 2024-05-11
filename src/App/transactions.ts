@@ -29,16 +29,18 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
     const furniture = new Furnitures(req.body.furnitures);
     const providers = new Providers(req.body.providers);
     const customers = new Customers(req.body.customers);
+    const isProvider = await Providers.findById(req.body.provider._id);
+    const isCustomer = await Customers.findById(req.body.customer._id);
     switch (type) {
       case "Sell":
-        if (customers) return res.status(404).send("You need to introduce a provider, not a customer")
+        if (isCustomer) return res.status(404).send("You need to introduce a provider, not a customer")
         await furniture.save();
         await providers.save();
         await transaction.save();
         return res.send(transaction);
         break;
       case "Buy":
-        if (providers) return res.status(404).send("You need to introduce a customer, not a provider")
+        if (isProvider) return res.status(404).send("You need to introduce a customer, not a provider")
         await furniture.save();
         await customers.save();
         await transaction.save();
