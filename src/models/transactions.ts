@@ -49,4 +49,4 @@ export const TransactionSchema = new Schema<TransactionDocumentInterface>({
   },
 });
 
-export const Transactions = model<TransactionDocumentInterface>('Transaction', CustomerSchema);
+export const Transactions = model<TransactionDocumentInterface>('Transaction', TransactionSchema);

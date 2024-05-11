@@ -1,8 +1,5 @@
 import express, {Request, Response} from 'express'
 import { Transactions } from '../models/transactions.js'
-import { Customers } from '../models/customers.js';
-import { Providers } from '../models/providers.js';
-import { Furnitures } from '../models/furnitures.js';
 
 export const transactionRouter = express.Router();
 
