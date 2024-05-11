@@ -1,10 +1,9 @@
 import { Schema, model, Document } from "mongoose";
-import { CustomerDocumentInterface, CustomerSchema } from "./customers.js";
-import { ProviderDocumentInterface, ProviderSchema } from "./providers.js";
+import { CustomerSchema } from "./customers.js";
+import { ProviderSchema } from "./providers.js";
 import { FurnitureSchema } from "./furnitures.js";
 
 export interface TransactionDocumentInterface extends Document {
-  humanId: CustomerDocumentInterface | ProviderDocumentInterface
   type: string,
   furniture: typeof FurnitureSchema[],
   customer?: typeof CustomerSchema,
