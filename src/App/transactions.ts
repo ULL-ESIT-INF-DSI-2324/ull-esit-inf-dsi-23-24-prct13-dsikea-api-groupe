@@ -24,10 +24,10 @@ transactionRouter.get('/transactions', async (req :Request, res :Response) => { 
 transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   try {
     const { type } = req.body;
-    const human = await Customers.findById(req.body.customer) || await Providers.findOne(req.body.provider);
+    const human = await Customers.findById(req.body.customer._id) || await Providers.findOne(req.body.provider._id);
     if (!human) return res.status(404).send("Human not found");
-    const customer = await Customers.findById(req.body.customer);
-    const provider = await Providers.findById(req.body.provider);
+    const customer = await Customers.findById(req.body.customer._id);
+    const provider = await Providers.findById(req.body.provider._id);
     const furnitures = await req.body.furniture;
     if (furnitures.length <= 0) return res.status(404).send("Furnitures has been not provide");
     const transaction = new Transactions(req.body);
@@ -47,6 +47,6 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
       })
     }
   } catch (error) {
-    res.status(403).send(error);
+    res.status(404).send(error);
   }
 })
