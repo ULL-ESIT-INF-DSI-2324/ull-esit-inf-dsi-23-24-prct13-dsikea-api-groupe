@@ -78,26 +78,28 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
     const isProvider = new Providers(req.body.provider);
     const isCustomer = new Customers(req.body.customer);
     const furnitures = req.body.furniture;
-    let human;
+    // let human;
     if (furnitures.length <= 0) return res.status(404).send("You need to provide any furnitures")
+    console.log(isProvider);
+    console.log(isCustomer);
     console.log(req.body.type);
     console.log(req.body.furniture[0]);
       
-    switch (req.body.type as string) {
-      case "Buy":
-        if (isProvider) return res.status(404).send("You need to provide a consumer")
-        human = await Customers.findOne({ _id: isCustomer });
-        if (!human) return res.status(404).send("You need to provide a correct ID for the customer")
-        break;
-      case "Sell":
-        if (isCustomer) return res.status(404).send("You need to provide a provider")
-        human = await Providers.findOne({ _id: isProvider });
-        if (!human) return res.status(404).send("You need to provide a correct ID for the provider")
-        break;
-      default:
-        return res.status(404).send("An error has ocurred");
-        break;
-    }
+    // switch (req.body.type as string) {
+    //   case "Buy":
+    //     if (isProvider) return res.status(404).send("You need to provide a consumer")
+    //     human = await Customers.findOne({ _id: isCustomer });
+    //     if (!human) return res.status(404).send("You need to provide a correct ID for the customer")
+    //     break;
+    //   case "Sell":
+    //     if (isCustomer) return res.status(404).send("You need to provide a provider")
+    //     human = await Providers.findOne({ _id: isProvider });
+    //     if (!human) return res.status(404).send("You need to provide a correct ID for the provider")
+    //     break;
+    //   default:
+    //     return res.status(404).send("An error has ocurred");
+    //     break;
+    // }
     // for (let i = 0; i < furnitures.length; i++) {
     //   const fns = furnitures[i];
     //   const fn = await Furnitures.findOne(fns);
