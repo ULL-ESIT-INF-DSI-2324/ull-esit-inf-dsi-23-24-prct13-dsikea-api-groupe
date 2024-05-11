@@ -80,7 +80,10 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
     const furnitures = req.body.furniture;
     let human;
     if (furnitures.length <= 0) return res.status(404).send("You need to provide any furnitures")
-    switch (req.body.type) {
+    console.log(req.body.type);
+    console.log(req.body.furniture[0]);
+      
+    switch (req.body.type as string) {
       case "Buy":
         if (isProvider) return res.status(404).send("You need to provide a consumer")
         human = await Customers.findOne({ _id: isCustomer });
