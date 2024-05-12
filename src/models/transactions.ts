@@ -10,6 +10,7 @@ export interface TransactionDocumentInterface extends Document {
   furniture: typeof FurnitureSchema[],
   customer?: typeof CustomerSchema,
   provider?: typeof ProviderSchema,
+  amount: number,
   pay: number,
   time: Date,
 }
@@ -41,12 +42,12 @@ export const TransactionSchema = new Schema<TransactionDocumentInterface>({
     },
   ],
   customer: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.String,
     ref: "Customer",
     trim: true,
   },
   provider: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.String,
     ref: "Provider",
     trim: true,
   },
@@ -56,6 +57,15 @@ export const TransactionSchema = new Schema<TransactionDocumentInterface>({
     validate: (value :number) => {
       if (value < 0) {
         throw new Error("Transaction pay must be positive number");
+      }
+    },
+  },
+  amount: {
+    type: Number,
+    required: true,
+    validate: (value :number) => {
+      if (value < 0) {
+        throw new Error("Transaction amount must be positive number");
       }
     },
   },

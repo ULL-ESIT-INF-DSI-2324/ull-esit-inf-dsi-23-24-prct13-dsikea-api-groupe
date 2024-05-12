@@ -5,12 +5,12 @@ export const providerRouter = express.Router();
 
 providerRouter.get('/providers', async (req :Request, res :Response) => {
   try {
-    const {id, nif} = req.query;
+    const {id, cif} = req.query;
     let provider;
     if (id) {
       provider = await Providers.findOne({ _id: id });
-    } else if (nif) {
-      provider = await Providers.findOne({ nif: nif });      
+    } else if (cif) {
+      provider = await Providers.findOne({ cif: cif });      
     } else {
       provider = await Providers.find();
     }
@@ -23,10 +23,23 @@ providerRouter.get('/providers', async (req :Request, res :Response) => {
   }
 });
 
-providerRouter.get('providers/:id', async (req :Request, res :Response) => {
+providerRouter.get('/providers/id/:id', async (req :Request, res :Response) => {
   try {
     const id = req.params.id;
-    const provider = await Providers.findById({ id });
+    const provider = await Providers.findOne({ _id: id });
+    if (!provider) {
+      return res.status(404).send("Provider not found");
+    }
+    res.send(provider);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+providerRouter.get('/providers/cif/:cif', async (req :Request, res :Response) => {
+  try {
+    const cif = req.params.cif;
+    const provider = await Providers.findOne({ cif: cif });
     if (!provider) {
       return res.status(404).send("Provider not found");
     }
@@ -59,7 +72,7 @@ providerRouter.patch('/providers', async (req, res) => {
   }
 })
 
-providerRouter.patch('providers/:id', async (req, res) => {
+providerRouter.patch('/providers/id/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const updates = req.body;
@@ -69,7 +82,7 @@ providerRouter.patch('providers/:id', async (req, res) => {
     }
     res.send("Provider has been updated");
   } catch (error) {
-    res.status(400).send(error);
+    res.status(404).send(error);
   }
 })
 
@@ -89,19 +102,32 @@ providerRouter.get('/providers', async (req :Request, res :Response) => {
     }
     res.send(provider);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(404).send(error);
   }
 });
 
-providerRouter.delete('providers/:id', async (req, res) => {
+providerRouter.delete('/providers/cif/:cif', async (req, res) => {
   try {
-    const id = req.params.id;
-    const provider = await Providers.findByIdAndDelete({ id })
+    const cif = req.params.cif;
+    const provider = await Providers.findOne({ cif: cif })
     if (!provider) {
       return res.status(404).send("Provider not found");
     }
     res.send("Provider has been removed");
   } catch (error) {
-    res.status(400).send(error);
+    res.status(404).send(error);
+  }
+})
+
+providerRouter.delete('/providers/id/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const provider = await Providers.findOne({ _id: id })
+    if (!provider) {
+      return res.status(404).send("Provider not found");
+    }
+    res.send("Provider has been removed");
+  } catch (error) {
+    res.status(404).send(error);
   }
 })

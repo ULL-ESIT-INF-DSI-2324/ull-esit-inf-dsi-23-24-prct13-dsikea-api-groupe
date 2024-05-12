@@ -5,7 +5,7 @@ import { providerRouter } from './App/providers.js';
 import { furnitureRouter } from './App/furnitures.js';
 import { transactionRouter } from './App/transactions.js';
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());

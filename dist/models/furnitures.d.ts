@@ -29,6 +29,7 @@ export interface FurnitureDocumentInterface extends Document {
     description: string;
     size: string;
     price: number;
+    stock: number;
     serialNumber: string;
 }
 export declare const FurnitureSchema: Schema<FurnitureDocumentInterface, import("mongoose").Model<FurnitureDocumentInterface, any, any, any, Document<unknown, any, FurnitureDocumentInterface> & FurnitureDocumentInterface & {

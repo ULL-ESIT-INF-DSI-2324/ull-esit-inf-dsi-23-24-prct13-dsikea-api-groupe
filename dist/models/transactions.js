@@ -26,12 +26,12 @@ export const TransactionSchema = new Schema({
         },
     ],
     customer: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.String,
         ref: "Customer",
         trim: true,
     },
     provider: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.String,
         ref: "Provider",
         trim: true,
     },
@@ -41,6 +41,15 @@ export const TransactionSchema = new Schema({
         validate: (value) => {
             if (value < 0) {
                 throw new Error("Transaction pay must be positive number");
+            }
+        },
+    },
+    amount: {
+        type: Number,
+        required: true,
+        validate: (value) => {
+            if (value < 0) {
+                throw new Error("Transaction amount must be positive number");
             }
         },
     },

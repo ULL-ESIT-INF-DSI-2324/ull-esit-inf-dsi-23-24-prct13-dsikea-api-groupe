@@ -2,6 +2,7 @@ import express from 'express';
 import { Transactions } from '../models/transactions.js';
 import { Providers } from '../models/providers.js';
 import { Customers } from '../models/customers.js';
+import { Furnitures } from '../models/furnitures.js';
 export const transactionRouter = express.Router();
 transactionRouter.get('/transactions', async (req, res) => {
     try {
@@ -30,7 +31,7 @@ transactionRouter.get('/transactions', async (req, res) => {
         res.status(400).send(error);
     }
 });
-transactionRouter.get('/transactions/:id', async (req, res) => {
+transactionRouter.get('/transactions/id/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const transaction = await Transactions.findOne({ _id: id });
@@ -42,7 +43,7 @@ transactionRouter.get('/transactions/:id', async (req, res) => {
         res.status(400).send(error);
     }
 });
-transactionRouter.get('/transactions/:time', async (req, res) => {
+transactionRouter.get('/transactions/time/:time', async (req, res) => {
     try {
         const time = req.params.time;
         const transaction = await Transactions.findOne({ time: time });
@@ -54,7 +55,7 @@ transactionRouter.get('/transactions/:time', async (req, res) => {
         res.status(400).send(error);
     }
 });
-transactionRouter.get('/transactions/:pay', async (req, res) => {
+transactionRouter.get('/transactions/pay/:pay', async (req, res) => {
     try {
         const pay = req.params.pay;
         const transaction = await Transactions.findOne({ pay: pay });
@@ -66,7 +67,7 @@ transactionRouter.get('/transactions/:pay', async (req, res) => {
         res.status(400).send(error);
     }
 });
-transactionRouter.get('/transactions/:type', async (req, res) => {
+transactionRouter.get('/transactions/type/:type', async (req, res) => {
     try {
         const type = req.params.type;
         const transaction = await Transactions.findOne({ type: type });
@@ -78,6 +79,7 @@ transactionRouter.get('/transactions/:type', async (req, res) => {
         res.status(400).send(error);
     }
 });
+// CAMBIAR EL PROVIDER Y EL CUSTOMER PARA QUE ACEPTE EL NIF/CIF
 transactionRouter.post('/transactions', async (req, res) => {
     try {
         const transaction = new Transactions(req.body);
@@ -92,20 +94,45 @@ transactionRouter.post('/transactions', async (req, res) => {
             case "Buy":
                 if (isProvider)
                     return res.status(404).send("You need to provide a consumer");
+                for (let i = 0; i < furnitures.length; i++) {
+                    const fn = await Furnitures.findById(furnitures[i]);
+                    if (!fn) {
+                        res.status(404).send("You need to provide a correct furnitures IDs");
+                    }
+                    else {
+                        if (req.body.amount >= fn.stock) {
+                            fn.stock -= req.body.amount;
+                        }
+                        else {
+                            res.status(404).send("You do not have enough money");
+                        }
+                        await fn.save();
+                    }
+                }
                 break;
             case "Sell":
                 if (isCustomer)
                     return res.status(404).send("You need to provide a provider");
+                for (let i = 0; i < furnitures.length; i++) {
+                    const fn = await Furnitures.findById(furnitures[i]);
+                    if (!fn) {
+                        res.status(404).send("You need to provide a correct furnitures IDs");
+                    }
+                    else {
+                        if (req.body.amount >= fn.stock) {
+                            fn.stock += req.body.amount;
+                        }
+                        else {
+                            res.status(404).send("You do not have enough money");
+                        }
+                        await fn.save();
+                    }
+                }
                 break;
             default:
                 return res.status(404).send("An error has ocurred");
                 break;
         }
-        // for (let i = 0; i < furnitures.length; i++) {
-        //   const fns = furnitures[i];
-        //   const fn = await Furnitures.findOne(fns);
-        //   if (!fn) return res.status(404).send("You need to provide a correct furnitures IDs");
-        // }
         transaction.save().then((transaction) => {
             res.send(transaction);
         }).catch((err) => {
@@ -114,6 +141,18 @@ transactionRouter.post('/transactions', async (req, res) => {
     }
     catch (error) {
         res.status(404).send(error);
+    }
+});
+transactionRouter.delete('transactions/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const transaction = await Transactions.findByIdAndDelete({ id });
+        if (!transaction)
+            return res.status(404).send("Transactions not found");
+        res.send("Transactions has been removed");
+    }
+    catch (error) {
+        res.status(400).send(error);
     }
 });
 transactionRouter.delete('transactions/:id', async (req, res) => {

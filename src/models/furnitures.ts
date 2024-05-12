@@ -6,6 +6,7 @@ export interface FurnitureDocumentInterface extends Document {
   description: string,
   size: string,
   price: number,
+  stock: number,
   serialNumber: string,
 }
 
@@ -23,7 +24,7 @@ export const FurnitureSchema = new Schema<FurnitureDocumentInterface>({
   },
   description: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   size: {
@@ -35,6 +36,16 @@ export const FurnitureSchema = new Schema<FurnitureDocumentInterface>({
     type: Number,
     required: true,
     trim: true,
+  },
+  stock: {
+    type: Number,
+    required: true,
+    trim: true,
+    validate: (value :number) => {
+      if (value < 0) {
+        throw new Error('You need to stablish a correct sotck value.');
+      }
+    }
   },
   serialNumber: {
     type: String,

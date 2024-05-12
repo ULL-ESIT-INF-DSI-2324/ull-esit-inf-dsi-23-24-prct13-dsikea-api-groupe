@@ -26,6 +26,16 @@ export const FurnitureSchema = new Schema({
         required: true,
         trim: true,
     },
+    stock: {
+        type: Number,
+        required: true,
+        trim: true,
+        validate: (value) => {
+            if (value < 0) {
+                throw new Error('You need to stablish a correct sotck value.');
+            }
+        }
+    },
     serialNumber: {
         type: String,
         unique: true,

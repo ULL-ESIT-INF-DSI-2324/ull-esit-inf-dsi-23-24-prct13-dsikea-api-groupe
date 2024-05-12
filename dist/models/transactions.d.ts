@@ -33,6 +33,7 @@ export interface TransactionDocumentInterface extends Document {
     furniture: typeof FurnitureSchema[];
     customer?: typeof CustomerSchema;
     provider?: typeof ProviderSchema;
+    amount: number;
     pay: number;
     time: Date;
 }
