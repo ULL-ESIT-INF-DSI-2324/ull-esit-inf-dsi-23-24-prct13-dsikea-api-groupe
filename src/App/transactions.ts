@@ -72,7 +72,6 @@ transactionRouter.get('/transactions/type/:type', async (req :Request, res :Resp
   }
 })
 
-// CAMBIAR EL PROVIDER Y EL CUSTOMER PARA QUE ACEPTE EL NIF/CIF
 transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   try {
     const transaction = new Transactions(req.body);
@@ -128,10 +127,10 @@ transactionRouter.post('/transactions', async (req :Request, res :Response) => {
   }
 })
 
-transactionRouter.delete('transactions/:id', async (req, res) => {
+transactionRouter.delete('/transactions/id:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const transaction = await Transactions.findByIdAndDelete({ id })
+    const transaction = await Transactions.findOne({ _id: id })
     if (!transaction) return res.status(404).send("Transactions not found");
     res.send("Transactions has been removed");
   } catch (error) {
@@ -139,13 +138,16 @@ transactionRouter.delete('transactions/:id', async (req, res) => {
   }
 })
 
-transactionRouter.delete('transactions/:id', async (req, res) => {
+transactionRouter.patch('/providers/id/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const transaction = await Transactions.findByIdAndDelete({ id })
-    if (!transaction) return res.status(404).send("Transactions not found");
-    res.send("Transactions has been removed");
+    const updates = req.body;
+    const provider = await Providers.findByIdAndUpdate(id, updates, {new :true })
+    if (!provider) {
+      return res.status(404).send("Provider not found");
+    }
+    res.send("Provider has been updated");
   } catch (error) {
-    res.status(400).send(error);
+    res.status(404).send(error);
   }
 })

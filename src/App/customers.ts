@@ -86,26 +86,6 @@ customerRouter.patch('/customers/id/:id', async (req, res) => {
   }
 })
 
-customerRouter.get('/customers', async (req :Request, res :Response) => {
-  try {
-    const {id, nif} = req.query;
-    let customer;
-    if (id) {
-      customer = await Customers.findOneAndDelete({ id });
-    } else if (nif) {
-      customer = await Customers.findOneAndDelete({ nif });      
-    } else {
-      return res.status(404).send("Client not found");
-    }
-    if (!customer) {
-      return res.status(404).send("Client not found");
-    }
-    res.send(customer);
-  } catch (error) {
-    res.status(404).send(error);
-  }
-});
-
 customerRouter.delete('/customers/id/:id', async (req, res) => {
   try {
     const id = req.params.id;

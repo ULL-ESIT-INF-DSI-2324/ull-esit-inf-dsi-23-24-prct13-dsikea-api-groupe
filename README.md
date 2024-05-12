@@ -56,7 +56,7 @@ El API que estamos desarrollando debe cumplir con una serie de requisitos espec�
   - **DESCRIPTION**, es la descripcion del mueble, puede no proporcionarse
   - **SIZE**, es el tamaño del mueble, puede no proporcionarse
   - **PRICE**, es el precio del mueble
-  - **SOTCK**, es el numero de mueble disponibles
+  - **STOCK**, es el numero de mueble disponibles
   - **SERIALNUMBER**, es el numero de serie del mueble
 - [🦴] Transaccion [🦴]
   - En este caso se han implementado diferentes metodos CRUD, estos metodos trabajan con los parametros ID/TIME/TYPE/PAY
