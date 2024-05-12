@@ -71,3 +71,19 @@ El API que estamos desarrollando debe cumplir con una serie de requisitos espec�
   - **TIME**, es la hora de la transaccion
 
 ## [💭] Conclusion [💭]</p>
+Este proyecto ha representado una oportunidad invaluable para adquirir conocimientos en la creación de una API REST destinada a gestionar diversas operaciones dentro de una tienda de muebles. En este proceso, hemos empleado la plataforma Render para el despliegue de nuestra aplicación. Sin embargo, enfrentamos desafíos considerables debido a los largos tiempos de despliegue y la falta de información en ciertas ocasiones, lo que añadió complejidad al desarrollo.
+
+Además, hemos utilizado un Cluster de MongoDB para almacenar los datos de nuestra aplicación. Aunque esta plataforma resulta eficiente en cuanto a funcionalidad, su interfaz de usuario puede resultar poco intuitiva debido a la cantidad de opciones y la falta de claridad en la disposición de los elementos.
+
+Durante el desarrollo, nos encontramos con dificultades relacionadas con la VPN, que inicialmente nos impidió desplegar la aplicación localmente. Afortunadamente, logramos solventar este problema y continuar con el proyecto con éxito.
+
+En cuanto a las pruebas realizadas, la mayoría fueron relativamente sencillas. Sin embargo, nos enfrentamos a un obstáculo significativo al intentar completar las pruebas de transacciones, ya que el método POST no funcionaba correctamente, a pesar de que en la aplicación sí lo hacía. Esta anomalía representó un desafío técnico que aún estamos investigando para comprender su origen.
+
+Por último, es importante destacar que este proyecto ha sido una continuación del anterior, y gracias al uso de MongoDB y Express, fue considerablemente más fácil de llevar a cabo. Estas herramientas facilitaron aspectos clave como la gestión de la base de datos, permitiéndonos centrarnos en otros aspectos de la implementacion.
+
+En conclusión, este proyecto ha sido una experiencia integral que nos ha permitido aplicar y consolidar los conocimientos adquiridos a lo largo de la asignatura. A pesar de los desafíos encontrados, hemos logrado desarrollar una aplicación funcional y completa, lo que demuestra nuestro crecimiento y capacidad para enfrentar proyectos de envergadura.
+
+## [🔬] Consideraciones [🔬]
+Esta práctica, aunque concebida como un trabajo grupal, se ha llevado a cabo de manera individual debido al abandono de la asignatura por parte de uno de los miembros del equipo.
+
+Es importante destacar que las pruebas de las transacciones no han sido totalmente implementadas faltan DELETE/PATCH/POST.
