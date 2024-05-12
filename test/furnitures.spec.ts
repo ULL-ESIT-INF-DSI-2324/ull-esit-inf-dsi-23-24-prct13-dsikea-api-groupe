@@ -57,9 +57,6 @@ describe("----FURNITURES----", () => {
     it("Should not add new furniture with invalid stock", async () => {
       await request(app).post(`/furnitures`).send(furniture_2).expect(400);
     });
-    it("Should not add new furniture with invalid number", async () => {
-      await request(app).post(`/furnitures`).send(furniture_2).expect(400);
-    });
     it("Should not add new furniture with duplicated id", async () => {
       await new Furnitures(furniture_0).save();
       await request(app).post(`/furnitures`).send(furniture_0).expect(400);
